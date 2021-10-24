@@ -1,0 +1,37 @@
+create schema bank;
+create table bank.login(
+	id SERIAL primary key,
+	username VARCHAR (50),
+	passwd VARCHAR (50)
+);
+create table bank.users(
+	id SERIAL primary key,
+	fname VARCHAR (100),
+	mname VARCHAR (100),
+	lname VARCHAR (100),
+	ssn int,
+	dob DATE,
+	login_id int,
+	constraint user_id_fk foreign key (login_id) references bank.login(id)
+);
+create table bank.accounts(
+	num SERIAL primary key,
+	type VARCHAR (20),
+	funds DECIMAL,
+	login_id int,
+	constraint user_id_fk foreign key (login_id) references bank.login(id)
+);
+
+insert into bank.login values(default, 'unibomber', 'kaboom!');
+insert into bank.login values(default, 'HisExcellency', 'HelicopterRides1974');
+select * from bank.login;
+
+insert into bank.users values(default, 'Theodore', 'John', 'Kaczynski', 123456789, '5/22/1942', 1);
+insert into bank.users values(default, 'Augusto', 'Jose Ramon', 'Pinochet', 987654321, '11/25/1915', 2);
+select * from bank.users;
+
+insert into bank.accounts values(default, 'checking', '127.54', 1);
+insert into bank.accounts values(default, 'savings', '5.01', 1);
+insert into bank.accounts values(default, 'checking', '4253761.29', 2);
+insert into bank.accounts values(default, 'savings', '12788321.48', 2);
+select * from bank.accounts;
