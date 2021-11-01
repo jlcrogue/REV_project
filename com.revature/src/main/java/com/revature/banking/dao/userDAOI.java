@@ -84,7 +84,7 @@ public class userDAOI implements userDAO {
 		PreparedStatement ps = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
 			String query = "UPDATE bank.users SET " + "fname=?, " + "mname=?, " + "lname=?, " 
-					+ "ssn=?, " + "dob=?, " + "login_id=?, ";
+					+ "ssn=?, " + "dob=?, " + "login_id=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, u.getFname());
 			ps.setString(2, u.getMname());
