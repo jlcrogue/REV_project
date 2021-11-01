@@ -22,6 +22,12 @@ create table bank.accounts(
 	constraint user_id_fk foreign key (login_id) references bank.login(id)
 );
 
+create user customers with password 'password';
+grant select, update, insert, delete on bank.login to customers;
+grant select, update, insert, delete on bank.users to customers;
+grant select, update, insert, delete on bank.accounts to customers;
+grant all privileges on all tables in schema bank to customers;
+
 insert into bank.login values(default, 'unibomber', 'kaboom!');
 insert into bank.login values(default, 'HisExcellency', 'HelicopterRides1974');
 select * from bank.login;
