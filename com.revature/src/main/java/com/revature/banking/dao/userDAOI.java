@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import com.revature.banking.models.users;
 import com.revature.banking.utilities.ConnectionUtility;
+import com.revature.logging.LogSimulator;
 
 public class userDAOI implements userDAO {
 
@@ -29,6 +30,7 @@ public class userDAOI implements userDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("User: " + u.getFname() + " " + u.getLname() + " inserted!");
 		return true;
 	}
 
@@ -49,6 +51,7 @@ public class userDAOI implements userDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("User ID: " + id + " retrieved!");
 		return u;
 	}
 
@@ -76,6 +79,7 @@ public class userDAOI implements userDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("All users retrieved!");
 		return ulist;
 	}
 
@@ -97,6 +101,7 @@ public class userDAOI implements userDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("User: " + u.getFname() + " " + u.getLname() + " updated!");
 		return true;
 	}
 
@@ -112,6 +117,7 @@ public class userDAOI implements userDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("User: " id + " deleted!");
 		return true;
 	}
 	

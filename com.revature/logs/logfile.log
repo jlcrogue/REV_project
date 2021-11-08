@@ -1,0 +1,6 @@
+2021-11-07 15:23:39  TRACE com.revature.logging.LogSimulator:16 TRACE LOG!
+2021-11-07 15:23:39  DEBUG com.revature.logging.LogSimulator:17 DEBUG LOG!
+2021-11-07 15:23:39  INFO com.revature.logging.LogSimulator:18 INFO LOG!
+2021-11-07 15:23:39  WARN com.revature.logging.LogSimulator:19 WARN LOG!
+2021-11-07 15:23:39  ERROR com.revature.logging.LogSimulator:20 ERROR LOG!
+2021-11-07 15:23:39  FATAL com.revature.logging.LogSimulator:21 FATAL LOG!
