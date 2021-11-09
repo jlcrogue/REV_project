@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import com.revature.banking.models.login;
 import com.revature.banking.utilities.ConnectionUtility;
+import com.revature.logging.LogSimulator;
 
 public class loginDAOI implements loginDAO {
 
@@ -25,6 +26,7 @@ public class loginDAOI implements loginDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Login: " + l.getUsername() + " inserted!");
 		return true;
 	}
 
@@ -44,6 +46,7 @@ public class loginDAOI implements loginDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("Login ID: " + id + " retrieved!");
 		return l;
 	}
 
@@ -67,6 +70,7 @@ public class loginDAOI implements loginDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("All logins retrieved!");
 		return llist;
 	}
 
@@ -83,6 +87,7 @@ public class loginDAOI implements loginDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Login: " + l.getUsername() + " updated!");
 		return true;
 	}
 
@@ -98,6 +103,7 @@ public class loginDAOI implements loginDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Login: " + id + " deleted!");
 		return true;
 	}
 }

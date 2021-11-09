@@ -2,7 +2,6 @@ package com.revature.logging;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.revature.banking.dao.userDAOI;
 
 public class LogSimulator {
 	

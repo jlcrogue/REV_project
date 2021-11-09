@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.revature.banking.models.accounts;
 import com.revature.banking.utilities.ConnectionUtility;
+import com.revature.logging.LogSimulator;
 
 public class accountDAOI implements accountDAO {
 
@@ -26,6 +27,7 @@ public class accountDAOI implements accountDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Account: " + a.getType() + " inserted!");
 		return true;
 	}
 
@@ -45,6 +47,7 @@ public class accountDAOI implements accountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("Account ID: " + id + " retrieved!");
 		return a;
 	}
 
@@ -69,6 +72,7 @@ public class accountDAOI implements accountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		LogSimulator.getLogger().trace("All accounts retrieved!");
 		return alist;
 	}
 
@@ -86,6 +90,7 @@ public class accountDAOI implements accountDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Account: " + a.getType() + " updated!");
 		return true;
 	}
 
@@ -101,6 +106,7 @@ public class accountDAOI implements accountDAO {
 			e.printStackTrace();
 			return false;
 		}
+		LogSimulator.getLogger().trace("Account: " + id + " deleted!");
 		return true;
 	}
 }

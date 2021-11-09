@@ -117,7 +117,7 @@ public class userDAOI implements userDAO {
 			e.printStackTrace();
 			return false;
 		}
-		LogSimulator.getLogger().trace("User: " id + " deleted!");
+		LogSimulator.getLogger().trace("User: " + id + " deleted!");
 		return true;
 	}
 	
