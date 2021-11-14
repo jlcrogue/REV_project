@@ -17,11 +17,13 @@ public class accountDAOI implements accountDAO {
 	public boolean insertIntoAccounts(accounts a) {
 		PreparedStatement ps = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "INSERT INTO bank.accounts VALUES (DEFAULT, ?, ?, ?)";
+			String query = "INSERT INTO bank.accounts VALUES (?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, a.getType());
-			ps.setDouble(2, a.getFunds());
-			ps.setInt(3, a.getLogin_id());
+			ps.setInt(1, a.getNum());
+			ps.setString(2, a.getType());
+			ps.setDouble(3, a.getFunds());
+			ps.setInt(4, a.getLogin_id());
+			ps.setString(5, a.getStatus());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,12 +39,12 @@ public class accountDAOI implements accountDAO {
 		ResultSet rs = null;
 		accounts a = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String query = "SELECT * FROM bank.accounts WHERE id=?";
+			String query = "SELECT * FROM bank.accounts WHERE num=?";
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				a = new accounts(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getInt(4));
+				a = new accounts(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getInt(4), rs.getString(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,7 +59,7 @@ public class accountDAOI implements accountDAO {
 		ResultSet rs = null;
 		List<accounts> alist = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "SELECT * bank.accounts";
+			String query = "SELECT * FROM bank.accounts";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 			alist = new ArrayList<accounts>();
@@ -67,6 +69,7 @@ public class accountDAOI implements accountDAO {
 				a.setType(rs.getString(2));
 				a.setFunds(rs.getDouble(3));
 				a.setLogin_id(rs.getInt(4));
+				a.setStatus(rs.getString(5));
 				alist.add(a);
 			}
 		} catch (SQLException e) {
@@ -80,11 +83,13 @@ public class accountDAOI implements accountDAO {
 	public boolean updateAccount(accounts a) {
 		PreparedStatement ps = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String query = "UPDATE bank.accounts SET " + "type=?, " + "funds=?, " + "login_i=?";
+			String query = "UPDATE bank.accounts SET " + "type=?, " + "funds=?, " + "login_id=?, " + "status=? " + "WHERE num=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, a.getType());
 			ps.setDouble(2, a.getFunds());
 			ps.setInt(3, a.getLogin_id());
+			ps.setString(4, a.getStatus());
+			ps.setInt(5, a.getNum());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,7 +103,7 @@ public class accountDAOI implements accountDAO {
 	public boolean deleteAccountById(Integer id) {
 		PreparedStatement ps = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String query = "DELETE FROM bank.accounts WHERE id=?";
+			String query = "DELETE FROM bank.accounts WHERE num=?";
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
 			ps.executeUpdate();

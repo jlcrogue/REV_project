@@ -17,10 +17,12 @@ public class loginDAOI implements loginDAO {
 	public boolean insertIntoLogin(login l) {
 		PreparedStatement ps = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "INSERT INTO bank.login VALUES (DEFAULT, ?, ?)";
+			String query = "INSERT INTO bank.login VALUES (?, ?, ?, ?)";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, l.getUsername());
-			ps.setString(2, l.getPassword());
+			ps.setInt(1, l.getId());
+			ps.setString(2, l.getUsername());
+			ps.setString(3, l.getPassword());
+			ps.setString(4, l.getType());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,7 +43,7 @@ public class loginDAOI implements loginDAO {
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				l = new login(rs.getInt(1), rs.getString(2), rs.getString(3));
+				l = new login(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,7 +58,7 @@ public class loginDAOI implements loginDAO {
 		ResultSet rs = null;
 		List<login> llist = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "SELECT * bank.login";
+			String query = "SELECT * FROM bank.login";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 			llist = new ArrayList<login>();
@@ -65,6 +67,7 @@ public class loginDAOI implements loginDAO {
 				l.setId(rs.getInt(1));
 				l.setUsername(rs.getString(2));
 				l.setPassword(rs.getString(3));
+				l.setType(rs.getString(4));
 				llist.add(l);
 			}
 		} catch (SQLException e) {
@@ -78,10 +81,12 @@ public class loginDAOI implements loginDAO {
 	public boolean updateLogin(login l) {
 		PreparedStatement ps = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
-			String query = "UPDATE bank.login SET " + "username=?, " + "passwd=?";
+			String query = "UPDATE bank.login SET " + "username=?, " + "password=?, " + "type=? " + "WHERE id=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, l.getUsername());
 			ps.setString(2, l.getPassword());
+			ps.setString(3, l.getType());
+			ps.setInt(4, l.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

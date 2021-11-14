@@ -6,14 +6,16 @@ public class accounts {
 	private String type;
 	private Double funds;
 	private Integer login_id;
+	private String status;
 	
 	public accounts() { super(); }
 	
-	public accounts(Integer num, String type, Double funds, Integer login_id) {
+	public accounts(Integer num, String type, Double funds, Integer login_id, String status) {
 		this.num = num;
 		this.type = type;
 		this.funds = funds;
 		this.login_id = login_id;
+		this.status = status;
 	}
 
 	public Integer getNum() {
@@ -47,10 +49,18 @@ public class accounts {
 	public void setLogin_id(Integer login_id) {
 		this.login_id = login_id;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "accounts [num=" + num + ", type=" + type + ", funds=" + funds + ", login_id=" + login_id + "]";
+		return "accounts [num=" + num + ", type=" + type + ", funds=" + funds + ", login_id=" + login_id + ", status=" + status + "]";
 	}
 
 	@Override
@@ -61,6 +71,7 @@ public class accounts {
 		result = prime * result + ((login_id == null) ? 0 : login_id.hashCode());
 		result = prime * result + ((num == null) ? 0 : num.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
@@ -92,6 +103,11 @@ public class accounts {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
 			return false;
 		return true;
 	}

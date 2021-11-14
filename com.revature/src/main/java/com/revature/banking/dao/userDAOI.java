@@ -17,14 +17,15 @@ public class userDAOI implements userDAO {
 	public boolean insertIntoUsers(users u) {
 		PreparedStatement ps = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "INSERT INTO bank.users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO bank.users VALUES (?, ?, ?, ?, ?, ?, ?)";
 			ps = conn.prepareStatement(query);
-			ps.setString(1, u.getFname());
-			ps.setString(2, u.getMname());
-			ps.setString(3, u.getLname());
-			ps.setInt(4, u.getSsn());
-			ps.setDate(5, u.getDob());
-			ps.setInt(6, u.getLogin_id());
+			ps.setInt(1, u.getId());
+			ps.setString(2, u.getFname());
+			ps.setString(3, u.getMname());
+			ps.setString(4, u.getLname());
+			ps.setInt(5, u.getSsn());
+			ps.setDate(6, u.getDob());
+			ps.setInt(7, u.getLogin_id());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,7 +62,7 @@ public class userDAOI implements userDAO {
 		ResultSet rs = null;
 		List<users> ulist = null;
 		try(Connection conn = ConnectionUtility.getConnection()) {
-			String query = "SELECT * bank.users";
+			String query = "SELECT * FROM bank.users";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 			ulist = new ArrayList<users>();
@@ -88,7 +89,7 @@ public class userDAOI implements userDAO {
 		PreparedStatement ps = null;
 		try (Connection conn = ConnectionUtility.getConnection()) {
 			String query = "UPDATE bank.users SET " + "fname=?, " + "mname=?, " + "lname=?, " 
-					+ "ssn=?, " + "dob=?, " + "login_id=?";
+					+ "ssn=?, " + "dob=?, " + "login_id=? " + "WHERE id=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, u.getFname());
 			ps.setString(2, u.getMname());
@@ -96,6 +97,7 @@ public class userDAOI implements userDAO {
 			ps.setInt(4, u.getSsn());
 			ps.setDate(5, u.getDob());
 			ps.setInt(6, u.getLogin_id());
+			ps.setInt(7, u.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

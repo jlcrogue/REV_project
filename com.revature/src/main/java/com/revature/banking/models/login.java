@@ -5,13 +5,15 @@ public class login {
 	private Integer id;
 	private String username;
 	private String password;
+	private String type;
 	
 	public login() { super(); }
 	
-	public login(Integer id, String username, String password) {
+	public login(Integer id, String username, String password, String type) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.type = type;
 	}
 
 	public Integer getId() {
@@ -37,6 +39,14 @@ public class login {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Override
 	public int hashCode() {
@@ -45,6 +55,7 @@ public class login {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -72,12 +83,17 @@ public class login {
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "login [id=" + id + ", username=" + username + ", password=" + password + "]";
+		return "login [id=" + id + ", username=" + username + ", password=" + password + ", type=" + type + "]";
 	}
 
 }

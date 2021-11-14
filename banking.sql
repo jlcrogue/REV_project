@@ -2,7 +2,7 @@ create schema bank;
 create table bank.login(
 	id SERIAL primary key,
 	username VARCHAR (50),
-	passwd VARCHAR (50)
+	password VARCHAR (50)
 );
 create table bank.users(
 	id SERIAL primary key,
@@ -27,6 +27,7 @@ grant select, update, insert, delete on bank.login to customers;
 grant select, update, insert, delete on bank.users to customers;
 grant select, update, insert, delete on bank.accounts to customers;
 grant all privileges on all tables in schema bank to customers;
+grant all privileges on schema bank to customers;
 
 insert into bank.login values(default, 'unibomber', 'kaboom!');
 insert into bank.login values(default, 'HisExcellency', 'HelicopterRides1974');
@@ -41,3 +42,13 @@ insert into bank.accounts values(default, 'savings', '5.01', 1);
 insert into bank.accounts values(default, 'checking', '4253761.29', 2);
 insert into bank.accounts values(default, 'savings', '12788321.48', 2);
 select * from bank.accounts;
+
+alter table bank.login add column type VARCHAR (50);
+update bank.login set type='customer';
+select * from bank.login;
+
+alter table bank.accounts add column status VARCHAR (50);
+update bank.accounts set status='active';
+select * from bank.accounts;
+
+/*drop table bank.accounts cascade;*/
