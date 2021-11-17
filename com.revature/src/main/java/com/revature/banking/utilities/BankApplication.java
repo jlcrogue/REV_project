@@ -422,6 +422,7 @@ public class BankApplication {
 			System.out.println("Please enter password:");
 			password = scan.nextLine();
 			
+			user_login = null;
 			List<login> logs = LDAO.selectAllLogin();
 			for(int i = 0; i < logs.size(); i++) {
 				if(logs.get(i).getUsername().equals(username) && logs.get(i).getPassword().equals(password)) {

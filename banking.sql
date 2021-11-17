@@ -22,6 +22,10 @@ create table bank.accounts(
 	constraint user_id_fk foreign key (login_id) references bank.login(id)
 );
 
+select * from bank.accounts;
+select * from bank.login;
+select * from bank.users;
+
 create user customers with password 'password';
 grant select, update, insert, delete on bank.login to customers;
 grant select, update, insert, delete on bank.users to customers;
@@ -50,5 +54,9 @@ select * from bank.login;
 alter table bank.accounts add column status VARCHAR (50);
 update bank.accounts set status='active';
 select * from bank.accounts;
+
+insert into bank.login values(6, 'banker01', 'password', 'employee');
+insert into bank.login values(7, 'banker02', 'password', 'employee');
+select * from bank.login;
 
 /*drop table bank.accounts cascade;*/
